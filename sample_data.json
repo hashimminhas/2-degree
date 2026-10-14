@@ -1,0 +1,3470 @@
+{
+  "schema_version": "2.0",
+  "metadata": {
+    "title": "Two Degrees: complete batch journeys",
+    "timezone": "Europe/Amsterdam",
+    "source": "Synthetic, compressed teaching scenarios. All businesses, assets and people are fictional.",
+    "threshold_note": "2–6 °C is an illustrative chilled-stage range, not a regulatory limit or safety certification. Milking and initial cooling have no static chilled-stage limit.",
+    "timing_note": "The two-hour journey and initial cooling curve are compressed demonstration timelines, not validated dairy process specifications.",
+    "preview_at": "2026-10-14T06:00:00+02:00",
+    "default_batch_id": "MILK-001",
+    "default_stage_id": "milking",
+    "playback": {
+      "start_at": "2026-10-14T06:00:00+02:00",
+      "end_at": "2026-10-14T08:00:00+02:00",
+      "sample_interval_seconds": 60,
+      "recommended_seconds_per_step": 1.0,
+      "start_paused": true,
+      "follow_active_stage_default": true,
+      "reveal_future_readings": false
+    },
+    "batch_integrity_note": "Each batch keeps its identity and quantity through every stage. No mixing, splitting or processing is simulated.",
+    "event_note": "scenario_events are scheduled simulator events. Reveal only when their timestamp is reached; they are not staff action records or inferred diagnoses."
+  },
+  "batches": [
+    {
+      "id": "MILK-001",
+      "scenario": "Normal delivery",
+      "product": "Raw milk",
+      "quantity_litres": 500,
+      "owner": "Anna, farm operator",
+      "origin": "Cedar Meadow Dairy (Demo)",
+      "destination": "East Gate Dairy Hub (Demo)",
+      "vehicle_id": "TK-101",
+      "farm_tank_id": "MILK-001-FARM",
+      "receiving_tank_id": "MILK-001-RECEIVING",
+      "route_name": "Cedar Meadow farm to East Gate receiving hub",
+      "stages": [
+        {
+          "id": "milking",
+          "name": "Milking",
+          "description": "Fresh milk collected before cooling. Warm readings are expected in this illustrative stage.",
+          "start_at": "2026-10-14T06:00:00+02:00",
+          "end_at": "2026-10-14T06:09:00+02:00",
+          "min_c": null,
+          "max_c": null,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Milking station M-01",
+          "responsible_person": "Anna, farm operator",
+          "quantity_litres": 500,
+          "assessment_mode": "observational"
+        },
+        {
+          "id": "initial_cooling",
+          "name": "Initial cooling",
+          "description": "Milk temperature decreases progressively. Check the demo cooling target at stage completion.",
+          "start_at": "2026-10-14T06:10:00+02:00",
+          "end_at": "2026-10-14T06:29:00+02:00",
+          "min_c": null,
+          "max_c": null,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Plate cooler C-01",
+          "responsible_person": "Anna, farm operator",
+          "quantity_litres": 500,
+          "assessment_mode": "cooling_progress",
+          "cooling_target": {
+            "max_c": 6,
+            "due_at": "2026-10-14T06:29:00+02:00",
+            "description": "Illustrative endpoint target. Do not apply a 6 °C ceiling to the entire cooling curve."
+          }
+        },
+        {
+          "id": "farm_storage",
+          "name": "Farm storage",
+          "description": "Cooled milk remains in the farm bulk tank before collection.",
+          "start_at": "2026-10-14T06:30:00+02:00",
+          "end_at": "2026-10-14T06:49:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Chilled farm tank T-01",
+          "responsible_person": "Bram, storage operator",
+          "quantity_litres": 500,
+          "assessment_mode": "chilled_range"
+        },
+        {
+          "id": "loading",
+          "name": "Tanker loading",
+          "description": "The same batch is transferred through a closed hose into the assigned tanker.",
+          "start_at": "2026-10-14T06:50:00+02:00",
+          "end_at": "2026-10-14T06:59:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Collection bay L-01",
+          "responsible_person": "Noor, transport operator",
+          "quantity_litres": 500,
+          "assessment_mode": "chilled_range"
+        },
+        {
+          "id": "transport",
+          "name": "Transport",
+          "description": "Monitor the assigned tanker during the journey to the receiving dairy hub.",
+          "start_at": "2026-10-14T07:00:00+02:00",
+          "end_at": "2026-10-14T07:39:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "TK-101 on demonstration route",
+          "responsible_person": "Noor, transport operator",
+          "quantity_litres": 500,
+          "assessment_mode": "chilled_range"
+        },
+        {
+          "id": "delivery_storage",
+          "name": "Delivery storage",
+          "description": "Received batch enters chilled storage. Incident review and release remain separate decisions.",
+          "start_at": "2026-10-14T07:40:00+02:00",
+          "end_at": "2026-10-14T08:00:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Receiving chilled tank R-01",
+          "responsible_person": "Eva, receiving operator",
+          "quantity_litres": 500,
+          "assessment_mode": "chilled_range"
+        }
+      ]
+    },
+    {
+      "id": "MILK-002",
+      "scenario": "Transport cooling interruption and recovery",
+      "product": "Raw milk",
+      "quantity_litres": 800,
+      "owner": "Noor, transport operator",
+      "origin": "Cedar Meadow Dairy (Demo)",
+      "destination": "East Gate Dairy Hub (Demo)",
+      "vehicle_id": "TK-102",
+      "farm_tank_id": "MILK-002-FARM",
+      "receiving_tank_id": "MILK-002-RECEIVING",
+      "route_name": "Cedar Meadow farm to East Gate receiving hub",
+      "stages": [
+        {
+          "id": "milking",
+          "name": "Milking",
+          "description": "Fresh milk collected before cooling. Warm readings are expected in this illustrative stage.",
+          "start_at": "2026-10-14T06:00:00+02:00",
+          "end_at": "2026-10-14T06:09:00+02:00",
+          "min_c": null,
+          "max_c": null,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Milking station M-01",
+          "responsible_person": "Anna, farm operator",
+          "quantity_litres": 800,
+          "assessment_mode": "observational"
+        },
+        {
+          "id": "initial_cooling",
+          "name": "Initial cooling",
+          "description": "Milk temperature decreases progressively. Check the demo cooling target at stage completion.",
+          "start_at": "2026-10-14T06:10:00+02:00",
+          "end_at": "2026-10-14T06:29:00+02:00",
+          "min_c": null,
+          "max_c": null,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Plate cooler C-01",
+          "responsible_person": "Anna, farm operator",
+          "quantity_litres": 800,
+          "assessment_mode": "cooling_progress",
+          "cooling_target": {
+            "max_c": 6,
+            "due_at": "2026-10-14T06:29:00+02:00",
+            "description": "Illustrative endpoint target. Do not apply a 6 °C ceiling to the entire cooling curve."
+          }
+        },
+        {
+          "id": "farm_storage",
+          "name": "Farm storage",
+          "description": "Cooled milk remains in the farm bulk tank before collection.",
+          "start_at": "2026-10-14T06:30:00+02:00",
+          "end_at": "2026-10-14T06:49:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Chilled farm tank T-01",
+          "responsible_person": "Bram, storage operator",
+          "quantity_litres": 800,
+          "assessment_mode": "chilled_range"
+        },
+        {
+          "id": "loading",
+          "name": "Tanker loading",
+          "description": "The same batch is transferred through a closed hose into the assigned tanker.",
+          "start_at": "2026-10-14T06:50:00+02:00",
+          "end_at": "2026-10-14T06:59:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Collection bay L-01",
+          "responsible_person": "Noor, transport operator",
+          "quantity_litres": 800,
+          "assessment_mode": "chilled_range"
+        },
+        {
+          "id": "transport",
+          "name": "Transport",
+          "description": "Monitor the assigned tanker during the journey to the receiving dairy hub.",
+          "start_at": "2026-10-14T07:00:00+02:00",
+          "end_at": "2026-10-14T07:39:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "TK-102 on demonstration route",
+          "responsible_person": "Noor, transport operator",
+          "quantity_litres": 800,
+          "assessment_mode": "chilled_range"
+        },
+        {
+          "id": "delivery_storage",
+          "name": "Delivery storage",
+          "description": "Received batch enters chilled storage. Incident review and release remain separate decisions.",
+          "start_at": "2026-10-14T07:40:00+02:00",
+          "end_at": "2026-10-14T08:00:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Receiving chilled tank R-01",
+          "responsible_person": "Eva, receiving operator",
+          "quantity_litres": 800,
+          "assessment_mode": "chilled_range"
+        }
+      ]
+    },
+    {
+      "id": "MILK-003",
+      "scenario": "Transport sensor connection lost and restored",
+      "product": "Raw milk",
+      "quantity_litres": 600,
+      "owner": "Noor, transport operator",
+      "origin": "Cedar Meadow Dairy (Demo)",
+      "destination": "East Gate Dairy Hub (Demo)",
+      "vehicle_id": "TK-103",
+      "farm_tank_id": "MILK-003-FARM",
+      "receiving_tank_id": "MILK-003-RECEIVING",
+      "route_name": "Cedar Meadow farm to East Gate receiving hub",
+      "stages": [
+        {
+          "id": "milking",
+          "name": "Milking",
+          "description": "Fresh milk collected before cooling. Warm readings are expected in this illustrative stage.",
+          "start_at": "2026-10-14T06:00:00+02:00",
+          "end_at": "2026-10-14T06:09:00+02:00",
+          "min_c": null,
+          "max_c": null,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Milking station M-01",
+          "responsible_person": "Anna, farm operator",
+          "quantity_litres": 600,
+          "assessment_mode": "observational"
+        },
+        {
+          "id": "initial_cooling",
+          "name": "Initial cooling",
+          "description": "Milk temperature decreases progressively. Check the demo cooling target at stage completion.",
+          "start_at": "2026-10-14T06:10:00+02:00",
+          "end_at": "2026-10-14T06:29:00+02:00",
+          "min_c": null,
+          "max_c": null,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Plate cooler C-01",
+          "responsible_person": "Anna, farm operator",
+          "quantity_litres": 600,
+          "assessment_mode": "cooling_progress",
+          "cooling_target": {
+            "max_c": 6,
+            "due_at": "2026-10-14T06:29:00+02:00",
+            "description": "Illustrative endpoint target. Do not apply a 6 °C ceiling to the entire cooling curve."
+          }
+        },
+        {
+          "id": "farm_storage",
+          "name": "Farm storage",
+          "description": "Cooled milk remains in the farm bulk tank before collection.",
+          "start_at": "2026-10-14T06:30:00+02:00",
+          "end_at": "2026-10-14T06:49:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Chilled farm tank T-01",
+          "responsible_person": "Bram, storage operator",
+          "quantity_litres": 600,
+          "assessment_mode": "chilled_range"
+        },
+        {
+          "id": "loading",
+          "name": "Tanker loading",
+          "description": "The same batch is transferred through a closed hose into the assigned tanker.",
+          "start_at": "2026-10-14T06:50:00+02:00",
+          "end_at": "2026-10-14T06:59:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Collection bay L-01",
+          "responsible_person": "Noor, transport operator",
+          "quantity_litres": 600,
+          "assessment_mode": "chilled_range"
+        },
+        {
+          "id": "transport",
+          "name": "Transport",
+          "description": "Monitor the assigned tanker during the journey to the receiving dairy hub.",
+          "start_at": "2026-10-14T07:00:00+02:00",
+          "end_at": "2026-10-14T07:39:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "TK-103 on demonstration route",
+          "responsible_person": "Noor, transport operator",
+          "quantity_litres": 600,
+          "assessment_mode": "chilled_range"
+        },
+        {
+          "id": "delivery_storage",
+          "name": "Delivery storage",
+          "description": "Received batch enters chilled storage. Incident review and release remain separate decisions.",
+          "start_at": "2026-10-14T07:40:00+02:00",
+          "end_at": "2026-10-14T08:00:00+02:00",
+          "min_c": 2,
+          "max_c": 6,
+          "expected_interval_seconds": 60,
+          "missing_after_seconds": 120,
+          "location": "Receiving chilled tank R-01",
+          "responsible_person": "Eva, receiving operator",
+          "quantity_litres": 600,
+          "assessment_mode": "chilled_range"
+        }
+      ]
+    }
+  ],
+  "readings": [
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:00:00+02:00",
+      "temperature_c": 36.0,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:00:00+02:00",
+      "temperature_c": 36.0,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:00:00+02:00",
+      "temperature_c": 36.0,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:01:00+02:00",
+      "temperature_c": 36.0,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:01:00+02:00",
+      "temperature_c": 36.0,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:01:00+02:00",
+      "temperature_c": 36.0,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:02:00+02:00",
+      "temperature_c": 36.0,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:02:00+02:00",
+      "temperature_c": 36.0,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:02:00+02:00",
+      "temperature_c": 36.0,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:03:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:03:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:03:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:04:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:04:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:04:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:05:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:05:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:05:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:06:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:06:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:06:00+02:00",
+      "temperature_c": 35.9,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:07:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:07:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:07:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:08:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:08:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:08:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:09:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-001-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:09:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-002-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:09:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-003-milking",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:10:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:10:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:10:00+02:00",
+      "temperature_c": 35.8,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:11:00+02:00",
+      "temperature_c": 33.8,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:11:00+02:00",
+      "temperature_c": 33.8,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:11:00+02:00",
+      "temperature_c": 33.8,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:12:00+02:00",
+      "temperature_c": 31.9,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:12:00+02:00",
+      "temperature_c": 31.9,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:12:00+02:00",
+      "temperature_c": 31.9,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:13:00+02:00",
+      "temperature_c": 29.9,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:13:00+02:00",
+      "temperature_c": 29.9,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:13:00+02:00",
+      "temperature_c": 29.9,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:14:00+02:00",
+      "temperature_c": 28.0,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:14:00+02:00",
+      "temperature_c": 28.0,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:14:00+02:00",
+      "temperature_c": 28.0,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:15:00+02:00",
+      "temperature_c": 26.0,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:15:00+02:00",
+      "temperature_c": 26.0,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:15:00+02:00",
+      "temperature_c": 26.0,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:16:00+02:00",
+      "temperature_c": 23.8,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:16:00+02:00",
+      "temperature_c": 23.8,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:16:00+02:00",
+      "temperature_c": 23.8,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:17:00+02:00",
+      "temperature_c": 21.6,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:17:00+02:00",
+      "temperature_c": 21.6,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:17:00+02:00",
+      "temperature_c": 21.6,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:18:00+02:00",
+      "temperature_c": 19.4,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:18:00+02:00",
+      "temperature_c": 19.4,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:18:00+02:00",
+      "temperature_c": 19.4,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:19:00+02:00",
+      "temperature_c": 17.2,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:19:00+02:00",
+      "temperature_c": 17.2,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:19:00+02:00",
+      "temperature_c": 17.2,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:20:00+02:00",
+      "temperature_c": 15.0,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:20:00+02:00",
+      "temperature_c": 15.0,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:20:00+02:00",
+      "temperature_c": 15.0,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:21:00+02:00",
+      "temperature_c": 13.4,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:21:00+02:00",
+      "temperature_c": 13.4,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:21:00+02:00",
+      "temperature_c": 13.4,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:22:00+02:00",
+      "temperature_c": 11.8,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:22:00+02:00",
+      "temperature_c": 11.8,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:22:00+02:00",
+      "temperature_c": 11.8,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:23:00+02:00",
+      "temperature_c": 10.2,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:23:00+02:00",
+      "temperature_c": 10.2,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:23:00+02:00",
+      "temperature_c": 10.2,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:24:00+02:00",
+      "temperature_c": 8.6,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:24:00+02:00",
+      "temperature_c": 8.6,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:24:00+02:00",
+      "temperature_c": 8.6,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:25:00+02:00",
+      "temperature_c": 7.0,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:25:00+02:00",
+      "temperature_c": 7.0,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:25:00+02:00",
+      "temperature_c": 7.0,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:26:00+02:00",
+      "temperature_c": 6.3,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:26:00+02:00",
+      "temperature_c": 6.3,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:26:00+02:00",
+      "temperature_c": 6.3,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:27:00+02:00",
+      "temperature_c": 5.6,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:27:00+02:00",
+      "temperature_c": 5.6,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:27:00+02:00",
+      "temperature_c": 5.6,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:28:00+02:00",
+      "temperature_c": 4.9,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:28:00+02:00",
+      "temperature_c": 4.9,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:28:00+02:00",
+      "temperature_c": 4.9,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:29:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:29:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:29:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-initial_cooling",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:30:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:30:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:30:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:31:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:31:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:31:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:32:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:32:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:32:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:33:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:33:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:33:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:34:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:34:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:34:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:35:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:35:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:35:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:36:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:36:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:36:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:37:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:37:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:37:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:38:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:38:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:38:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:39:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:39:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:39:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:40:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:40:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:40:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:41:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:41:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:41:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:42:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:42:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:42:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:43:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:43:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:43:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:44:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:44:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:44:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:45:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:45:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:45:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:46:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:46:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:46:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:47:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:47:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:47:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:48:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:48:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:48:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:49:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:49:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:49:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-farm_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:50:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:50:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:50:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:51:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:51:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:51:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:52:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:52:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:52:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:53:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:53:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:53:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:54:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:54:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:54:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:55:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:55:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:55:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:56:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:56:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:56:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:57:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:57:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:57:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:58:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:58:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:58:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:59:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:59:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:59:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-loading",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:00:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:00:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:00:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:01:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:01:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:01:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:02:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:02:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:02:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:03:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:03:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:03:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:04:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:04:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:04:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:05:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:05:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:05:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:06:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:06:00+02:00",
+      "temperature_c": 4.6,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:06:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:07:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:07:00+02:00",
+      "temperature_c": 5.0,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:07:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:08:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:08:00+02:00",
+      "temperature_c": 5.4,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:08:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:09:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:09:00+02:00",
+      "temperature_c": 5.8,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:09:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:10:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:10:00+02:00",
+      "temperature_c": 6.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:10:00+02:00",
+      "temperature_c": 4.3,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:11:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:11:00+02:00",
+      "temperature_c": 6.6,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:11:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:12:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:12:00+02:00",
+      "temperature_c": 7.0,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:12:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:13:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:13:00+02:00",
+      "temperature_c": 7.4,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:13:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:14:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:14:00+02:00",
+      "temperature_c": 7.8,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:14:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:15:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:15:00+02:00",
+      "temperature_c": 8.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:16:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:16:00+02:00",
+      "temperature_c": 8.6,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:17:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:17:00+02:00",
+      "temperature_c": 9.0,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:18:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:18:00+02:00",
+      "temperature_c": 9.4,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:19:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:19:00+02:00",
+      "temperature_c": 9.1,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:20:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:20:00+02:00",
+      "temperature_c": 8.8,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:21:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:21:00+02:00",
+      "temperature_c": 8.4,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:22:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:22:00+02:00",
+      "temperature_c": 8.1,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:23:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:23:00+02:00",
+      "temperature_c": 7.8,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:23:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:24:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:24:00+02:00",
+      "temperature_c": 7.5,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:24:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:25:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:25:00+02:00",
+      "temperature_c": 7.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:25:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:26:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:26:00+02:00",
+      "temperature_c": 6.8,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:26:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:27:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:27:00+02:00",
+      "temperature_c": 6.5,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:27:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:28:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:28:00+02:00",
+      "temperature_c": 6.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:28:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:29:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:29:00+02:00",
+      "temperature_c": 5.8,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:29:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:30:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:30:00+02:00",
+      "temperature_c": 5.6,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:30:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:31:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:31:00+02:00",
+      "temperature_c": 5.5,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:31:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:32:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:32:00+02:00",
+      "temperature_c": 5.3,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:32:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:33:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:33:00+02:00",
+      "temperature_c": 5.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:33:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:34:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:34:00+02:00",
+      "temperature_c": 5.0,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:34:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:35:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:35:00+02:00",
+      "temperature_c": 4.8,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:35:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:36:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:36:00+02:00",
+      "temperature_c": 4.7,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:36:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:37:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:37:00+02:00",
+      "temperature_c": 4.5,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:37:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:38:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:38:00+02:00",
+      "temperature_c": 4.4,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:38:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:39:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:39:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:39:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-transport",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:40:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:40:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:40:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:41:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:41:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:41:00+02:00",
+      "temperature_c": 4.2,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:42:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:42:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:42:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:43:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:43:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:43:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:44:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:44:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:44:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:45:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:45:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:45:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:46:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:46:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:46:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:47:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:47:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:47:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:48:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:48:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:48:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:49:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:49:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:49:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:50:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:50:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:50:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:51:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:51:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:51:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:52:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:52:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:52:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:53:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:53:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:53:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:54:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:54:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:54:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:55:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:55:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:55:00+02:00",
+      "temperature_c": 4.1,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:56:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:56:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:56:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:57:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:57:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:57:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:58:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:58:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:58:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:59:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:59:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:59:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T08:00:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-001-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T08:00:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-002-delivery_storage",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T08:00:00+02:00",
+      "temperature_c": 4.0,
+      "device_id": "SIM-MILK-003-delivery_storage",
+      "is_simulated": true
+    }
+  ],
+  "scenario_events": [
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:00:00+02:00",
+      "type": "collection_started",
+      "description": "500 L demonstration batch collection begins.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:00:00+02:00",
+      "type": "collection_started",
+      "description": "800 L demonstration batch collection begins.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:00:00+02:00",
+      "type": "collection_started",
+      "description": "600 L demonstration batch collection begins.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:29:00+02:00",
+      "type": "cooling_target_reached",
+      "description": "Demo cooling endpoint reached at 4.2 °C.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:29:00+02:00",
+      "type": "cooling_target_reached",
+      "description": "Demo cooling endpoint reached at 4.2 °C.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:29:00+02:00",
+      "type": "cooling_target_reached",
+      "description": "Demo cooling endpoint reached at 4.2 °C.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:50:00+02:00",
+      "type": "loading_started",
+      "description": "Batch transfer into TK-101 begins.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:50:00+02:00",
+      "type": "loading_started",
+      "description": "Batch transfer into TK-102 begins.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:50:00+02:00",
+      "type": "loading_started",
+      "description": "Batch transfer into TK-103 begins.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:00:00+02:00",
+      "type": "departure",
+      "description": "TK-101 departs for East Gate Dairy Hub.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:00:00+02:00",
+      "type": "departure",
+      "description": "TK-102 departs for East Gate Dairy Hub.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:00:00+02:00",
+      "type": "departure",
+      "description": "TK-103 departs for East Gate Dairy Hub.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:05:00+02:00",
+      "type": "cooling_interrupted",
+      "description": "Simulator introduces a cooling interruption. Telemetry alone cannot prove its cause.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:15:00+02:00",
+      "type": "sensor_disconnected",
+      "description": "Simulator stops sending this tanker sensor’s readings.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:18:00+02:00",
+      "type": "backup_cooling_started",
+      "description": "Scripted backup cooling begins; temperature decreases gradually.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:23:00+02:00",
+      "type": "sensor_reconnected",
+      "description": "Sensor readings resume at 4.1 °C. The missing interval remains unknown.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:29:00+02:00",
+      "type": "temperature_returned_to_range",
+      "description": "Observed temperature returns to 5.8 °C. Keep the excursion in history; do not auto-release.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:40:00+02:00",
+      "type": "received",
+      "description": "500 L received in the assigned chilled tank; review remains a separate step.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:40:00+02:00",
+      "type": "received",
+      "description": "800 L received in the assigned chilled tank; review remains a separate step.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T07:40:00+02:00",
+      "type": "received",
+      "description": "600 L received in the assigned chilled tank; review remains a separate step.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T08:00:00+02:00",
+      "type": "journey_finished",
+      "description": "Journey playback finished. Review any incident history before a release decision.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T08:00:00+02:00",
+      "type": "journey_finished",
+      "description": "Journey playback finished. Review any incident history before a release decision.",
+      "is_simulated": true
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T08:00:00+02:00",
+      "type": "journey_finished",
+      "description": "Journey playback finished. Review any incident history before a release decision.",
+      "is_simulated": true
+    }
+  ],
+  "expected_checkpoints": [
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "milking",
+      "timestamp": "2026-10-14T06:00:00+02:00",
+      "expected_status": "unassessed",
+      "expected_current_temperature_c": 36.0
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:10:00+02:00",
+      "expected_status": "unassessed",
+      "expected_current_temperature_c": 35.8
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "initial_cooling",
+      "timestamp": "2026-10-14T06:29:00+02:00",
+      "expected_status": "unassessed",
+      "expected_current_temperature_c": 4.2
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "farm_storage",
+      "timestamp": "2026-10-14T06:30:00+02:00",
+      "expected_status": "in_range",
+      "expected_current_temperature_c": 4.2
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "loading",
+      "timestamp": "2026-10-14T06:50:00+02:00",
+      "expected_status": "in_range",
+      "expected_current_temperature_c": 4.2
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:00:00+02:00",
+      "expected_status": "in_range",
+      "expected_current_temperature_c": 4.2
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:10:00+02:00",
+      "expected_status": "out_of_range",
+      "expected_current_temperature_c": 6.2
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:18:00+02:00",
+      "expected_status": "out_of_range",
+      "expected_current_temperature_c": 9.4
+    },
+    {
+      "batch_id": "MILK-002",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:29:00+02:00",
+      "expected_status": "in_range",
+      "expected_current_temperature_c": 5.8
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:16:00+02:00",
+      "expected_status": "data_unavailable",
+      "expected_current_temperature_c": null
+    },
+    {
+      "batch_id": "MILK-003",
+      "stage_id": "transport",
+      "timestamp": "2026-10-14T07:23:00+02:00",
+      "expected_status": "in_range",
+      "expected_current_temperature_c": 4.1
+    },
+    {
+      "batch_id": "MILK-001",
+      "stage_id": "delivery_storage",
+      "timestamp": "2026-10-14T08:00:00+02:00",
+      "expected_status": "in_range",
+      "expected_current_temperature_c": 4.0
+    }
+  ]
+}
